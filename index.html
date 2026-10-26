@@ -1,239 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#174a8b">
-<title>BDD Stall Tracker</title>
-
-<style>
-:root {
-  font-family: Arial, sans-serif;
-  color: #1c2e43;
-  background: #f2f5fa;
-}
-* { box-sizing: border-box; }
-body { margin: 0; }
-header {
-  background: #174a8b;
-  color: white;
-  padding: 23px 18px;
-}
-header h1 { margin: 0 0 7px; font-size: 25px; }
-header p { margin: 0; color: #dce9fb; font-size: 14px; }
-main { max-width: 1100px; margin: auto; padding: 18px; }
-.card {
-  background: white;
-  border-radius: 13px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 9px #17395c10;
-}
-h2 { margin: 0 0 15px; font-size: 19px; }
-h3 { margin: 0 0 8px; font-size: 16px; }
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
-.stat {
-  padding: 15px;
-  border-radius: 10px;
-  background: #edf3fb;
-  border: 1px solid #e0eaf7;
-}
-.stat strong { display: block; font-size: 27px; margin-bottom: 5px; }
-.stat span { font-size: 12px; color: #526780; }
-.stat.available { background: #e2f7e9; }
-.stat.unavailable { background: #fde9e7; }
-.stat.waiting { background: #fff2d5; }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-button {
-  border: 0;
-  border-radius: 8px;
-  padding: 11px 14px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.tab { background: #e4ebf5; color: #23466e; }
-.tab.active { background: #174a8b; color: white; }
-.primary { background: #174a8b; color: white; }
-.secondary { background: #e4ebf5; color: #23466e; }
-.danger { background: #fde5e3; color: #a52d27; }
-button:hover { filter: brightness(.97); }
-label {
-  display: block;
-  font-weight: bold;
-  font-size: 13px;
-  margin: 12px 0 6px;
-}
-input, select, textarea {
-  width: 100%;
-  padding: 11px;
-  border: 1px solid #cbd7e6;
-  border-radius: 8px;
-  background: white;
-  color: #1c2e43;
-  font: inherit;
-  font-size: 14px;
-}
-textarea { min-height: 75px; resize: vertical; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 14px;
-}
-.full { grid-column: 1 / -1; }
-.form-actions, .actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-.form-actions button { flex: 1; }
-.search-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-.record {
-  border: 1px solid #dce5ef;
-  border-radius: 10px;
-  padding: 14px;
-  margin-top: 10px;
-}
-.record h3 { overflow-wrap: anywhere; }
-.meta { font-size: 13px; color: #526780; line-height: 1.8; }
-.badge {
-  display: inline-block;
-  padding: 5px 9px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: bold;
-  margin: 4px 0 8px;
-}
-.b-available { background: #d9f5e2; color: #176b35; }
-.b-leased { background: #e3eaf4; color: #36506e; }
-.b-reserved { background: #fff0ce; color: #875300; }
-.b-processing { background: #e4e1ff; color: #5141a3; }
-.b-unavailable { background: #fde5e3; color: #a52d27; }
-.b-pending { background: #fff0ce; color: #875300; }
-.b-contacted { background: #dcecff; color: #2456a6; }
-.b-offered { background: #e4e1ff; color: #5141a3; }
-.b-converted { background: #d9f5e2; color: #176b35; }
-.b-closed { background: #e8ebef; color: #526071; }
-.notice {
-  background: #eef5ff;
-  border-radius: 9px;
-  padding: 12px;
-  font-size: 13px;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.muted { color: #64778c; font-size: 13px; line-height: 1.5; }
-.empty { text-align: center; color: #64778c; padding: 22px 5px; }
-.hidden { display: none !important; }
-footer { text-align: center; color: #73849a; font-size: 12px; padding: 16px; }
-@media(max-width: 650px) {
-  main { padding: 12px; }
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid { grid-template-columns: 1fr; }
-  .full { grid-column: auto; }
-  .search-row { grid-template-columns: 1fr; }
-  .card { padding: 14px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDD Stall Tracker</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-12">
 
-<body>
-<header>
-  <h1>BDD Stall Tracker</h1>
-  <p>Commercial Space Availability &amp; Waiting List Management</p>
-</header>
+    <!-- Header / Navbar -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg">
+                    <i data-lucide="store" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold leading-tight">BDD Stall Tracker</h1>
+                    <p class="text-xs text-slate-400">Business Development Department Inventory System</p>
+                </div>
+            </div>
+            <button onclick="exportJSON()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-md border border-slate-700 flex items-center gap-2 transition">
+                <i data-lucide="download" class="w-4 h-4"></i> Backup Data
+            </button>
+        </div>
+    </header>
 
-<main>
-  <section class="card">
-    <h2>Dashboard</h2>
-    <div class="stats">
-      <div class="stat">
-        <strong id="totalStalls">0</strong>
-        <span>Total Commercial Spaces</span>
-      </div>
-      <div class="stat available">
-        <strong id="availableCount">0</strong>
-        <span>Available</span>
-      </div>
-      <div class="stat unavailable">
-        <strong id="unavailableCount">0</strong>
-        <span>Not Available</span>
-      </div>
-      <div class="stat waiting">
-        <strong id="waitingCount">0</strong>
-        <span>Active Waiting List</span>
-      </div>
-    </div>
-  </section>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        
+        <!-- Dashboard Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kabuuan (Total)</p>
+                    <h3 id="count-total" class="text-3xl font-bold text-slate-900 mt-1">0</h3>
+                </div>
+                <div class="bg-slate-100 p-3 rounded-full text-slate-600">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
+            </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="dashboardView">Dashboard</button>
-    <button class="tab" data-tab="spacesView">Commercial Spaces</button>
-    <button class="tab" data-tab="waitingView">Waiting List</button>
-    <button class="tab" data-tab="backupView">Backup / Restore</button>
-  </div>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Available</p>
+                    <h3 id="count-available" class="text-3xl font-bold text-emerald-600 mt-1">0</h3>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-full text-emerald-600">
+                    <i data-lucide="check-circle" class="w-6 h-6"></i>
+                </div>
+            </div>
 
-  <!-- DASHBOARD -->
-  <section id="dashboardView" class="view">
-    <div class="card">
-      <h2>Available Commercial Spaces</h2>
-      <p class="muted">These spaces are marked Available and may be offered to prospective clients.</p>
-      <div id="dashboardAvailable"></div>
-    </div>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Occupied</p>
+                    <h3 id="count-occupied" class="text-3xl font-bold text-amber-600 mt-1">0</h3>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-full text-amber-600">
+                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                </div>
+            </div>
 
-    <div class="card">
-      <h2>Waiting List Overview</h2>
-      <div id="dashboardWaiting"></div>
-    </div>
-  </section>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-rose-600 uppercase tracking-wider">Under Maintenance</p>
+                    <h3 id="count-maintenance" class="text-3xl font-bold text-rose-600 mt-1">0</h3>
+                </div>
+                <div class="bg-rose-50 p-3 rounded-full text-rose-600">
+                    <i data-lucide="wrench" class="w-6 h-6"></i>
+                </div>
+            </div>
+        </div>
 
-  <!-- COMMERCIAL SPACES -->
-  <section id="spacesView" class="view hidden">
-    <div class="card">
-      <h2 id="spaceFormTitle">Add Commercial Space</h2>
+        <!-- Main Content Layout (Form + Table) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Input Form Card -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 sticky top-24">
+                    <h2 id="form-title" class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600"></i> Dagdag Bagong Stall
+                    </h2>
+                    
+                    <form id="stall-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <input type="hidden" id="stall-id">
 
-      <form id="spaceForm">
-        <div class="grid">
-          <div>
-            <label for="station">Station / Location *</label>
-            <input id="station" required maxlength="100"
-              placeholder="e.g. Recto">
-          </div>
-          <div>
-            <label for="stallNo">Stall Name / Number *</label>
-            <input id="stallNo" required maxlength="100"
-              placeholder="e.g. Stall 12">
-          </div>
-          <div>
-            <label for="area">Floor / Area</label>
-            <input id="area" maxlength="100"
-              placeholder="e.g. North Ground">
-          </div>
-          <div>
-            <label for="size">Space Size (sqm)</label>
-            <input id="size" type="number" min="0" step="0.01"
-              placeholder="e.g. 3">
-          </div>
-          <div>
-            <label for="rate">Monthly Rental Rate (₱)</label>
-            <input id="rate" type="number" min="0" step="0.01"
-              placeholder="e.g. 15000">
-          </div>
-          <div>
-            <label for="spaceStatus">Availability Status *</label>
-            <select id="spaceStatus" required>
-              <option value="Available">Available</option>
-              <option value="Leased">Leased</option>
-              <option value="Reserved">Reserved</option>
-              <option value="Under Processing">Under Processing</option>
-              <option value="Unavailable">U
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Station *</label>
+                            <input type="text" id="station" required placeholder="Hal. Recto, Cubao, Legarda" 
+                                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Stall Name / Number *</label>
+                            <input type="text" id="stall-name" required placeholder="Hal. Stall A-01 o Hindi pa tinukoy" 
+                                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Size (sqm) *</label>
+                            <input type="text" id="stall-size" required placeholder="Hal. 3 sqm, 12 sqm" 
+                                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Status *</label>
+                            <select id="stall-status" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                <option value="Available">Available</option>
+                                <option value="Occupied">Occupied</option>
+                                <option value="Under Maintenance">Under Maintenance</option>
+                                <option value="Reserved">Reserved</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Remarks</label>
+                            <textarea id="stall-remarks" rows="3" placeholder="Hal. Wala, For LOI review, Pending documents..." 
+                                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-
